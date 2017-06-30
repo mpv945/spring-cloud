@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>spring-cloud</artifactId>
+        <groupId>study.haijun.springcloud</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>eureka-server</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka-server</artifactId>
+        </dependency>
+
+        <!--替换自带的tomcat-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <!--            <exclusions>
+                            <exclusion>
+                                <groupId>org.springframework.boot</groupId>&lt;!&ndash;去掉spring-boot-starter默认集成的日志系统&ndash;&gt;
+                                <artifactId>spring-boot-starter-tomcat</artifactId>
+                            </exclusion>
+                        </exclusions>-->
+        </dependency>
+        <!--使用jetty作为内置的服务器-->
+        <!--        <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-jetty</artifactId>
+                </dependency>-->
+
+        <!-- 身份验证-->
+        <!--
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-security</artifactId>
+                </dependency>
+        -->
+        <!--监控与管理，增加该依赖的boot项目就可以了-->
+        <!--该依赖增加以下端点的监控：-->
+        <!--应用配置类：/autoconfig(自动配置成功和不成功);/beans;/configprops;/env;mappings;/info-->
+        <!--度量指标:/metrics 内存，线程...可以加/{对应类型例如mem.free};/health，系统自带了xxHealthIhdicator来检测，也可以自己写@component类来实现HealthIhdicator接口;/dump;/trace;-->
+        <!--操作控制类：/shutdown 关闭应用端点，需要配置指定endpoint.shutdown.enabked=true;-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

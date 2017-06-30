@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: eureka-server
+server:
+  port: 8010
+eureka:
+  instance:
+    hostname: localhost.localdomain #linux 修改vi /etc/hosts
+    prefer-ip-address: true #改参数可以以IP形式定义注册中心，默认false不能IP
+  client:
+    #register-with-eureka: false # 当前服务不需要到Eureka Server上注册 ,高可用的时候注册要设置成ture？
+    #fetch-registry: false
+    service-url:
+      defaultZone: http://localhost.localdomain:8010/eureka/
+#高可用，
+# hosts添加主机名：
+#127.0.0.1 peer1 peer2 peer3
+#cd C:\Users\zhenx\IdeaProjects\test-dome\eureka\target
+#java -jar eureka-0.0.1-SNAPSHOT.jar --spring.profiles.active=peer1
+#如果注册中心是高可用的，那么各个微服务配置只需要将   defaultZone改为如下即可：指定注册中心，可以注册多个使用，号隔开
+#defaultZone:  http://peer1:7777/eureka/,http://peer2:8888/eureka,http://peer3:9999/eureka
+---
+server:
+  port: 7777
+spring:
+  profiles: peer1
+eureka:
+  instance:
+    hostname: peer1
+  client:
+    serviceUrl:
+      defaultZone: http://peer2:8888/eureka/,http://peer3:9999/eureka/
+---
+server:
+  port: 8888
+spring:
+  profiles: peer2
+eureka:
+  instance:
+    hostname: peer2
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:7777/eureka/,http://peer3:9999/eureka/
+---
+server:
+  port: 9999
+spring:
+  profiles: peer3
+eureka:
+  instance:
+    hostname: peer3
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:7777/eureka/,http://peer2:8888/eureka/

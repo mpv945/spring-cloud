@@ -1,0 +1,32 @@
+#spring:
+#  #profiles: eureka1
+#  mvc:
+#    favicon:
+#      enabled: false #关闭应用的iconic，可以在META-INF/resources 或者resources/static下放置一个favicon,ico
+#  application:
+#    name: microservice-test-eureka    # 项目名称尽量用小写
+#  main:
+#    banner-mode: log
+#server:
+#  port: 8010
+#security:
+#  basic:
+#    enabled: true
+#  user:
+#    name: haijun
+#    password: haijun
+#eureka:
+#  instance:
+#    hostname: localhost                               # 指定当profile=peer1时，主机名
+#    lease-expiration-duration-in-seconds: 30  # 续约到期时间（默认90秒）
+#    lease-renewal-interval-in-seconds: 10  #续约更新时间间隔（默 30秒）
+#    prefer-ip-address: true #显示IP
+#  client:
+#    register-with-eureka: false # 当前服务不需要到Eureka Server上注册
+#    fetch-registry: false
+#    service-url:
+#      #默认 eureka.client.serviceUrl.defaultZone=http://${eureka.instance.hostname}:${server.port}/eureka/
+#      defaultZone: http://${security.user.name}:${security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+#  server:
+#    #enable-self-preservation: false #设为false，关闭自我保护（生产不建议开启）
+#    #eviction-interval-timer-in-ms: 4000 #清理无效节点的时间间隔
