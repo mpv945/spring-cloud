@@ -3,40 +3,67 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<!--以下三个为项目maven坐标 ，其中artifactId-version.packaging等于最后的包名-->
 	<groupId>study.haijun.springcloud</groupId>
 	<artifactId>spring-cloud</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
 
+	<modules>
+		<module>eureka-server</module>
+	</modules>
+
+	<!--packaging给出了项目的打包类型，即作为项目的发布形式，其可能的类型。在Maven 3中，
+	其可用的打包类型如:jar，默认不写类型为jar。war,ejb,ear,rar,par,pom,maven-plugin-->
+	<packaging>pom</packaging>
+
+	<!--项目名称-->
 	<name>spring-cloud</name>
+	<!--项目说明-->
 	<description>spring云架架构学习</description>
 
+	<!--继承父模块的依赖，拥有该父模块所有的依赖文件 继承，和java中的继承相当，作用就是复用，
+	对于子模块效果继承传递和在该配置中配置dependencies的依赖差不多，子模块会继承传递-->
+	<!-- 关于spring-boot-starter-XX 参考http://blog.csdn.net/u013078669/article/details/52076438-->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.4.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> <!--relativePath是可选的,maven会首先搜索这个地址,在搜索本地远程repositories之前-->
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<!--spring-cloud版本-->
+		<spring-cloud-dependencies>Dalston.SR1</spring-cloud-dependencies>
+		<!--log4j2.yml识别-->
+		<jackson-dataformat-yaml>2.8.8</jackson-dataformat-yaml>
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
+	<!--依赖管理，继承或者子模块不会立即加载这些声明的依赖，只有在子项目中写了相关依赖项，并且没有指定具体版本，就会从这里声明版本继承-->
+	<!-- spring cloud相关依赖 参考http://projects.spring.io/spring-cloud/-->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud-dependencies}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!--加上这个才能辨认到log4j2.yml文件,方便子模块引用不要指定版本。做到版本统一管理-->
+<!--			<dependency>
+				<groupId>com.fasterxml.jackson.dataformat</groupId>
+				<artifactId>jackson-dataformat-yaml</artifactId>
+				<version>${jackson-dataformat-yaml}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>-->
+		</dependencies>
+	</dependencyManagement>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
+	<!--编译插件指定-->
 	<build>
 		<plugins>
 			<plugin>
@@ -45,6 +72,31 @@
 			</plugin>
 		</plugins>
 	</build>
+
+
+	<!--发布到资源中心-->
+	<!--<distributionManagement>
+		<repository>
+			<id>nexus-releases</id>
+			<name>releases</name>
+			<url>http://127.0.0.1:8081/nexus/content/repositories/releases/</url>
+		</repository>
+	</distributionManagement>-->
+
+	<!--资源从私服下载配置-->
+	<!--	<repositories>
+            <repository>
+                <id>maven-public</id>
+                <name>maven-public</name>
+                <url>http://10.0.0.111:8081/repository/maven-public/</url>
+                <snapshots>
+                    <enabled>true</enabled>
+                </snapshots>
+                <releases>
+                    <enabled>true</enabled>
+                </releases>
+            </repository>
+        </repositories>-->
 
 
 </project>
