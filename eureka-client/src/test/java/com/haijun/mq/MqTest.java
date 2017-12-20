@@ -27,7 +27,7 @@ public class MqTest {
 
     @Test
     public void hello() throws Exception {
-        mqSend.send("测试");
+        mqSend.sendDirectExchange("测试");
     }
 
 }

@@ -18,7 +18,7 @@ public class MqSend {
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
-    public void send(String str) {
+    public void sendDirectExchange(String str) {
         String context = str + new Date();
         System.out.println("Sender : " + context);
         this.rabbitTemplate.convertAndSend("hello", context);//可以发送User对象
