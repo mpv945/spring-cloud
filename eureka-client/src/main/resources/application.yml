@@ -1,0 +1,157 @@
+spring:
+  profiles:
+    active: adminservice_2
+---
+server:
+  port: 8810
+spring:
+  application:
+    name: provider-adminservice    # 项目名称尽量用小写
+  profiles: dev
+  jpa:
+    generate-ddl: false
+    show-sql: true
+  datasource:                           # 指定数据源
+    platform: POSTGRESQL                        # 指定数据源类型
+    url: jdbc:postgresql://database.areacloud.cn:5432/openmap
+    username: postgres
+    password: openmap123
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    com.itmuch.youran.persistence: ERROR
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka.areacloud.cn:8760/eureka/    # 指定注册中心的地址
+  instance:
+    prefer-ip-address: true
+    ip-address: 10.0.0.252
+    non-secure-port: 8810
+---
+server:
+  port: 8810
+spring:
+  application:
+    name: provider-adminservice    # 项目名称尽量用小写
+  profiles: pro
+  jpa:
+    generate-ddl: false
+    show-sql: true
+  datasource:                           # 指定数据源
+    platform: POSTGRESQL                        # 指定数据源类型
+    url: jdbc:postgresql://database.areacloud.cn:5432/hgq
+    username: postgres
+    password: openmap123
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    com.itmuch.youran.persistence: ERROR
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka.areacloud.cn:8760/eureka/,http://eureka.areacloud.cn:8761/eureka/  # 指定注册中心的地址
+  instance:
+    prefer-ip-address: true
+    ip-address: web.areacloud.cn
+    non-secure-port: 8810
+---
+server:
+  port: 8811
+spring:
+  application:
+    name: provider-adminservice    # 项目名称尽量用小写
+  profiles: adminservice_1
+  jpa:
+    generate-ddl: false
+    show-sql: true
+  datasource:                           # 指定数据源
+    platform: POSTGRESQL                        # 指定数据源类型
+    url: jdbc:postgresql://database.areacloud.cn:5432/hgq
+    username: postgres
+    password: openmap123
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    com.itmuch.youran.persistence: ERROR
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka.areacloud.cn:8761/eureka/    # 指定注册中心的地址
+  instance:
+    prefer-ip-address: true
+    ip-address: web.areacloud.cn
+    non-secure-port: 8811
+---
+server:
+  port: 8811
+spring:
+  application:
+    name: provider-adminservice    # 项目名称尽量用小写
+  profiles: adminservice_2
+  datasource:
+    platform: POSTGRESQL
+    url: jdbc:postgresql://192.168.20.70:5432/postgres
+    username: postgres
+    password: \!QAZ2wsx
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  rabbitmq:
+    host: 192.168.20.70
+    port: 5672
+    username: haijun
+    password: haijun
+    virtual-host: / #赋予用户权限命令设置的虚拟主机
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    com.itmuch.youran.persistence: ERROR
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8010/eureka/    # 指定注册中心的地址
+---
+server:
+  port: 8813
+spring:
+  application:
+    name: provider-adminservice   # 项目名称尽量用小写
+  profiles: adminservice_3
+  jpa:
+    generate-ddl: false
+    show-sql: true
+  datasource:                           # 指定数据源
+    platform: POSTGRESQL                        # 指定数据源类型
+    url: jdbc:postgresql://database.areacloud.cn:5432/hgq
+    username: postgres
+    password: openmap123
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    com.itmuch.youran.persistence: ERROR
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka.areacloud.cn:8763/eureka/    # 指定注册中心的地址
+  instance:
+    prefer-ip-address: true
+    ip-address: web.areacloud.cn
+    non-secure-port: 8813

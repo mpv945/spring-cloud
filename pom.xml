@@ -10,6 +10,7 @@
 
 	<modules>
 		<module>eureka-server</module>
+		<module>eureka-client</module>
 	</modules>
 
 	<!--packaging给出了项目的打包类型，即作为项目的发布形式，其可能的类型。在Maven 3中，
