@@ -5,6 +5,7 @@ import com.pg.alert.entity.UserEO;
 import com.pg.alert.model.UserMO;
 import com.pg.alert.utils.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,12 @@ import java.util.Map;
  */
 @Service
 public class UserService {
+
+    @Value("${service_id}")
+    private String serverId;
+
+    @Value("#{'${services}'.split(',')}")
+    private List<String> servers;
 
     @Autowired
     private UserDao userDao;

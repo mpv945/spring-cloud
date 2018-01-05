@@ -33,6 +33,10 @@ public class UserEO implements Serializable{
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createDate;
 
+    // 在MySQL中没有Clob，用Text代替了，而且分为了tinytext， text，mediumtext，longtext。Blob也按这种方式分成了四种。
+    // 可以通过@Column(columnDefinition = "mediumtext")这样的方式实现。
+    //TinyText/Blob 对应 oracle clob字符和Blob字节
+    // mysql （TinyText 255<Text 65535<MediumText<16777215 <LongText 4294967295
     @Column(name = "UPDATE_DATE" ,updatable=true)
     private Date updateDate;
 
