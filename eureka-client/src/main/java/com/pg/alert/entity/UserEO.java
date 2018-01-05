@@ -15,7 +15,9 @@ import java.util.Date;
 @Entity
 @Table(name="T_USER")
 public class UserEO implements Serializable{
-
+    /*当一个父类实现序列化，子类自动实现序列化，不需要显式实现Serializable接口。
+    一个子类实现了 Serializable 接口，它的父类都没有实现 Serializable 接口，要想将父类对象也序列化，就需要让父类也实现Serializable 接口。*/
+    /*@transient修饰的 变量的值被设为初始值，如 int 型的是 0，对象型的是 null。（不会被序列化），远程传输序列化类时，serialVersionUID要一样，可以全部使用1L*/
     private static final long serialVersionUID = 4656900527634812392L;
 
     @Id
